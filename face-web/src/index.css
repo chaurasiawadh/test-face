@@ -1,0 +1,25 @@
+* {
+  box-sizing: border-box;
+}
+
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #000; /* Dark background is better for camera focus */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.liveness-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Amplify UI Liveness component styling overrides if needed */
+[data-amplify-face-liveness-detector] {
+  height: 100vh !important;
+}

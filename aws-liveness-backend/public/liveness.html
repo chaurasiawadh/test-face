@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AWS Face Liveness - WebView Bridge</title>
+    <script>
+        // 1. Logging Bridge to React Native
+        (function () {
+            const originalLog = console.log;
+            const originalError = console.error;
+            const originalWarn = console.warn;
+
+            function sendToNative(type, args) {
+                if (window.ReactNativeWebView) {
+                    window.ReactNativeWebView.postMessage(JSON.stringify({
+                        type: 'WEBVIEW_LOG',
+                        level: type,
+                        payload: args.map(arg => {
+                            try {
+                                return typeof arg === 'object' ? (arg instanceof Error ? arg.message : JSON.stringify(arg)) : String(arg);
+                            } catch (e) {
+                                return '[Unserializable Object]';
+                            }
+                        }).join(' ')
+                    }));
+                }
+            }
+
+            console.log = function (...args) {
+                originalLog.apply(console, args);
+                sendToNative('LOG', args);
+            };
+            console.error = function (...args) {
+                originalError.apply(console, args);
+                sendToNative('ERROR', args);
+            };
+            console.warn = function (...args) {
+                originalWarn.apply(console, args);
+                sendToNative('WARN', args);
+            };
+
+            // Capture Runtime Errors
+            window.onerror = function (message, source, lineno, colno, error) {
+                sendToNative('RUNTIME_ERROR', [`${message} at ${source}:${lineno}:${colno}`]);
+                return false;
+            };
+
+            // Capture Unhandled Rejections
+            window.onunhandledrejection = function (event) {
+                sendToNative('PROMISE_REJECTION', [event.reason]);
+            };
+
+            console.log("WebView Debugging Bridge Initialized");
+        })();
+    </script>
+    <script type="module">
+        import { FaceLivenessDetector } from "https://unpkg.com/@aws-amplify/ui-react-liveness/dist/index.js";
+
+        window.onload = () => {
+            const params = new URLSearchParams(window.location.search);
+            const sessionId = params.get("sessionId");
+            const region = params.get("region") || "us-east-1";
+
+            console.log("Initializing Liveness Detector for Session:", sessionId);
+
+            if (!sessionId) {
+                console.error("Missing sessionId in URL params");
+                return;
+            }
+
+            try {
+                const detector = new FaceLivenessDetector({
+                    sessionId: sessionId,
+                    region: region,
+                    onAnalysisComplete: async () => {
+                        console.log("Liveness analysis complete");
+                        window.ReactNativeWebView.postMessage(
+                            JSON.stringify({ status: "SUCCESS", type: "COMPLETED" })
+                        );
+                    },
+                    onError: (error) => {
+                        console.error("Liveness Error:", error);
+                        window.ReactNativeWebView.postMessage(
+                            JSON.stringify({ status: "ERROR", error: error.message || error })
+                        );
+                    }
+                });
+
+                document.getElementById("root").appendChild(detector);
+            } catch (err) {
+                console.error("Failed to initialize FaceLivenessDetector:", err);
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+
+</html>
