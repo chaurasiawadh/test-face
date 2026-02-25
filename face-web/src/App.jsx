@@ -16,13 +16,13 @@ Amplify.configure({
   Auth: {
     Cognito: {
       // If you are using guest access (recommended for POC):
-      identityPoolId: 'us-east-1:xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', // REPLACE WITH YOUR IDENTITY POOL ID
+      identityPoolId: 'ap-south-1:fdc1aa9b-c965-4f22-9d6f-b9deb348f355', // REPLACE WITH YOUR IDENTITY POOL ID
       allowGuestAccess: true,
-      region: 'us-east-1'
+      region: 'ap-south-1'
     }
   },
   Rekognition: {
-    region: 'us-east-1'
+    region: 'ap-south-1'
   }
 });
 
@@ -98,7 +98,7 @@ export default function App() {
       <View className="liveness-container">
         <FaceLivenessDetector
           sessionId={sessionId}
-          region="us-east-1"
+          region="ap-south-1"
           onAnalysisComplete={handleAnalysisComplete}
           onError={handleError}
           onUserExit={() => {

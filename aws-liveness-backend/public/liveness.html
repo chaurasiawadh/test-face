@@ -61,7 +61,7 @@
         window.onload = () => {
             const params = new URLSearchParams(window.location.search);
             const sessionId = params.get("sessionId");
-            const region = params.get("region") || "us-east-1";
+            const region = params.get("region") || "ap-south-1";
 
             console.log("Initializing Liveness Detector for Session:", sessionId);
 

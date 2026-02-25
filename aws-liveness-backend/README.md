@@ -43,9 +43,9 @@ Fill in your credentials in the `.env` file:
 ```env
 AWS_ACCESS_KEY_ID=your_access_key
 AWS_SECRET_ACCESS_KEY=your_secret_key
-AWS_REGION=us-east-1
+AWS_REGION=ap-south-1
 ```
-*Note: Face Liveness is only available in specific regions (e.g., us-east-1, us-west-2, eu-west-1, ap-northeast-1, ap-southeast-2).*
+*Note: Face Liveness is only available in specific regions (e.g., ap-south-1, us-west-2, eu-west-1, ap-northeast-1, ap-southeast-2).*
 
 ### 4. How to Run Locally
 1. Install dependencies:

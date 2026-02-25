@@ -30,7 +30,7 @@ For the browser to access AWS Rekognition, you must configure a Cognito Identity
         ]
     }
     ```
-4.  **Update `App.jsx`**: Replace `identityPoolId` with your new ID (e.g., `us-east-1:xxx-xxx-xxx`).
+4.  **Update `App.jsx`**: Replace `identityPoolId` with your new ID (e.g., `ap-south-1:xxx-xxx-xxx`).
 
 ### 3. Run Locally
 ```bash
