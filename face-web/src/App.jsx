@@ -32,6 +32,7 @@ export default function App() {
   const [sessionId, setSessionId] = useState(null);
   const [error, setError] = useState(null);
   const [isLivenessSuccessful, setIsLivenessSuccessful] = useState(false);
+  const [livenessData, setLivenessData] = useState(null);
 
   useEffect(() => {
     // 1. Get sessionId from URL query param (?sessionId=...)
@@ -49,6 +50,7 @@ export default function App() {
 
   const handleAnalysisComplete = async (data) => {
     console.log('data>>>', data);
+    setLivenessData(data);
 
     /**
      * Called when the liveness check is complete on the client side.
@@ -107,7 +109,14 @@ export default function App() {
   if (isLivenessSuccessful) {
     return (
       <ThemeProvider>
-        <View textAlign="center" padding="4rem" style={{ backgroundColor: '#fff', height: '100vh' }}>
+        <View textAlign="center" padding="4rem" style={{ backgroundColor: '#fff', height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          {livenessData && (
+            <View style={{ marginBottom: '1rem', width: '100%', maxWidth: '500px' }}>
+              <pre style={{ textAlign: 'left', backgroundColor: '#f0f0f0', padding: '1rem', borderRadius: '8px', overflowX: 'auto', fontSize: '0.9rem', color: '#333' }}>
+                {JSON.stringify(livenessData, null, 2)}
+              </pre>
+            </View>
+          )}
           <button
             onClick={() => window.location.reload()}
             style={{ marginTop: '2rem', padding: '0.75rem 1.5rem', backgroundColor: '#007eb9', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
