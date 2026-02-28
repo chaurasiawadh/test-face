@@ -1,5 +1,6 @@
 .liveness-container {
   background-color: #FFFFFF;
+  height: 80vh;
 }
 
 .amplify-liveness-start-screen-warning {
@@ -58,6 +59,8 @@
   }
 }
 
+*/
+
 .amplify-button.amplify-field-group__control.amplify-button--link.amplify-button--large.amplify-liveness-cancel-button {
   display: none;
-} */
+}
