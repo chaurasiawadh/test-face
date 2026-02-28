@@ -2,6 +2,7 @@
   background-color: #FFFFFF;
 }
 
+/* 
 .amplify-liveness-landscape-error-modal__header {
   font-weight: 500;
 }
@@ -10,21 +11,10 @@
   display: none;
 }
 
-/* 1️⃣ Remove full screen gradient / background */
-.amplify-liveness-camera-module,
-.amplify-liveness-overlay,
-.amplify-liveness-instruction-overlay,
-.amplify-liveness-video-anchor {
-  /* background: transparent !important; */
-  background: #FFFFFF !important;
-}
-
-/* 2️⃣ Hide the internal gradient canvas completely */
 .amplify-liveness-oval-canvas canvas {
   display: none !important;
 }
 
-/* 3️⃣ Create clean 1px animated border */
 .amplify-liveness-oval-canvas {
   position: absolute;
   inset: 0;
@@ -34,7 +24,6 @@
   pointer-events: none;
 }
 
-/* 4️⃣ Custom clean oval border */
 .amplify-liveness-oval-canvas::after {
   content: "";
   width: 60%;
@@ -42,32 +31,24 @@
   border-radius: 25%;
   border: 3px solid;
   border-color: #4f46e5;
-  /* default color */
   animation: livenessBorderColor 3s linear infinite;
 }
 
-/* 5️⃣ Animate border color instead of full background */
 @keyframes livenessBorderColor {
   0% {
     border-color: #3b82f6;
   }
 
-  /* blue */
   25% {
     border-color: #8b5cf6;
   }
-
-  /* purple */
   50% {
     border-color: #ef4444;
   }
 
-  /* red */
   75% {
     border-color: #facc15;
   }
-
-  /* yellow */
   100% {
     border-color: #3b82f6;
   }
@@ -75,4 +56,4 @@
 
 .amplify-button.amplify-field-group__control.amplify-button--link.amplify-button--large.amplify-liveness-cancel-button {
   display: none;
-}
+} */
