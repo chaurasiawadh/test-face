@@ -1,42 +1,78 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.liveness-container {
+  background-color: #FFFFFF;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.amplify-liveness-landscape-error-modal__header {
+  font-weight: 500;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.amplify-liveness-start-screen-warning {
+  display: none;
+}
+
+/* 1️⃣ Remove full screen gradient / background */
+.amplify-liveness-camera-module,
+.amplify-liveness-overlay,
+.amplify-liveness-instruction-overlay,
+.amplify-liveness-video-anchor {
+  /* background: transparent !important; */
+  background: #FFFFFF !important;
+}
+
+/* 2️⃣ Hide the internal gradient canvas completely */
+.amplify-liveness-oval-canvas canvas {
+  display: none !important;
+}
+
+/* 3️⃣ Create clean 1px animated border */
+.amplify-liveness-oval-canvas {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+/* 4️⃣ Custom clean oval border */
+.amplify-liveness-oval-canvas::after {
+  content: "";
+  width: 60%;
+  height: 85%;
+  border-radius: 25%;
+  border: 3px solid;
+  border-color: #4f46e5;
+  /* default color */
+  animation: livenessBorderColor 3s linear infinite;
+}
+
+/* 5️⃣ Animate border color instead of full background */
+@keyframes livenessBorderColor {
+  0% {
+    border-color: #3b82f6;
   }
-  to {
-    transform: rotate(360deg);
+
+  /* blue */
+  25% {
+    border-color: #8b5cf6;
+  }
+
+  /* purple */
+  50% {
+    border-color: #ef4444;
+  }
+
+  /* red */
+  75% {
+    border-color: #facc15;
+  }
+
+  /* yellow */
+  100% {
+    border-color: #3b82f6;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.amplify-button.amplify-field-group__control.amplify-button--link.amplify-button--large.amplify-liveness-cancel-button {
+  display: none;
 }
