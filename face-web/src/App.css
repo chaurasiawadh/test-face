@@ -2,6 +2,10 @@
   background-color: #FFFFFF;
 }
 
+.amplify-liveness-start-screen-warning {
+  display: none;
+}
+
 /* 
 .amplify-liveness-landscape-error-modal__header {
   font-weight: 500;
